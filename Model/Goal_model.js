@@ -10,7 +10,8 @@ const goalSchema = new mongoose.Schema(
     startDate: Date,
     endDate: Date,
     tags: [String],
-    onHold: Boolean,
+    onHold: { Boolean, default: false}
+    notStarted: Boolean,
     author: [{ type: Schema.Types.ObjectId, ref: "User" }],
   },
   { timestamps: true }
