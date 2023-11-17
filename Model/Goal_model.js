@@ -12,6 +12,7 @@ const goalSchema = new mongoose.Schema(
     tags: [String],
     onHold: Boolean,
     notStarted: Boolean,
+    progress:Number,
     author: [{ type: Schema.Types.ObjectId, ref: "User" }],
   },
   { timestamps: true }
