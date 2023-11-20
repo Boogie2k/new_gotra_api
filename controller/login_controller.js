@@ -38,23 +38,23 @@ const register = async (req, res) => {
 const login = async (req, res) => {
   try {
     let { email, password } = req.body;
-    const User = await User.findOne({ email });
-    if (!User || User.password !== password) {
+    const user = await User.findOne({ email });
+    if (!user || user.password !== password) {
       res.json("invalid credentials");
       return;
     }
     const token = jwt.sign(
       {
-        userId: User._id,
-        userEmail: User.email,
-        userName: User.username,
+        userId: user._id,
+        userEmail: user.email,
+        userName: user.username,
       },
       "boogieSecret"
     );
     res.status(200).json({
-      userId: User.id,
-      userEmail: User.email,
-      userName: User.username,
+      userId: user._id,
+      userEmail: user.email,
+      userName: user.username,
       token: token,
     });
   } catch (error) {
