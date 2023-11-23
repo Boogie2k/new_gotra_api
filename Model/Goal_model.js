@@ -5,14 +5,14 @@ const goalSchema = new mongoose.Schema(
   {
     title: String,
     description: String,
-    subgoals: [{ subgoals_text: String, completed: Boolean }],
+    subgoals: [{ subgoals_text: String, isCompleted: Boolean }],
     completed: Boolean,
     startDate: Date,
     endDate: Date,
     tags: [String],
     onHold: Boolean,
     notStarted: Boolean,
-    progress:Number,
+    progress: Number,
     author: [{ type: Schema.Types.ObjectId, ref: "User" }],
   },
   { timestamps: true }
