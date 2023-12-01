@@ -40,7 +40,7 @@ const login = async (req, res) => {
     let { email, password } = req.body;
     const user = await User.findOne({ email });
     if (!user || user.password !== password) {
-      res.status(401).res.json("invalid credentials");
+      res.status(401).json("invalid credentials");
       return;
     }
     const token = jwt.sign(
