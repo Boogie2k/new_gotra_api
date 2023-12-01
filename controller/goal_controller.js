@@ -1,9 +1,18 @@
+const {
+  edgeServerPages,
+} = require("next/dist/build/webpack/plugins/pages-manifest-plugin");
 const Goal = require("../Model/Goal_model");
 
 const createGoal = async (req, res) => {
   try {
     const goal = await Goal.create(req.body);
-
+    if (req.body.title === "") {
+      res.status(401).json("title is required");
+      return;
+    } else if (req.body.description === "") {
+      res.status(401).json("description is required");
+      return;
+    }
     res.status(201).json(goal);
   } catch (error) {
     res.status(500).json(error);
@@ -67,7 +76,14 @@ const updateGoal = async (req, res) => {
     if (!itemID) {
       res.status(404).json("goal not found");
       return;
+    } else if (req.body.title === "") {
+      res.status(401).json("title is required");
+      return;
+    } else if (req.body.description === "") {
+      res.status(401).json("description is required");
+      return;
     }
+
     const updatedItem = await Goal.findOneAndUpdate({ _id: itemID }, req.body, {
       new: true,
     });
