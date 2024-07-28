@@ -1,6 +1,4 @@
-const {
-  edgeServerPages,
-} = require("next/dist/build/webpack/plugins/pages-manifest-plugin");
+
 const Goal = require("../Model/Goal_model");
 
 const createGoal = async (req, res) => {
