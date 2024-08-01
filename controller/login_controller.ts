@@ -109,4 +109,23 @@ const deleteSingleUser = async (req:RequestWithUser, res:Response) => {
   }
 };
 
-module.exports = { login, getUsers, getSingleUser, deleteSingleUser, register };
+const updateUser = async (req:RequestWithUser, res:Response) => {
+  try {
+    const { id } = req.params;
+    const user = await User.findByIdAndUpdate(id, req.body  , {new: true});
+    if(!user){
+      res.json("user not found")
+      return
+    }
+    res.json(user)
+  } catch (error) {
+    res.json({
+      success: false,
+      msg: error,
+    });
+  }
+}
+
+
+
+module.exports = { login, getUsers, getSingleUser, deleteSingleUser, register,updateUser };

@@ -101,4 +101,21 @@ const deleteSingleUser = (req, res) => __awaiter(void 0, void 0, void 0, functio
         });
     }
 });
-module.exports = { login, getUsers, getSingleUser, deleteSingleUser, register };
+const updateUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { id } = req.params;
+        const user = yield User.findByIdAndUpdate(id, req.body, { new: true });
+        if (!user) {
+            res.json("user not found");
+            return;
+        }
+        res.json(user);
+    }
+    catch (error) {
+        res.json({
+            success: false,
+            msg: error,
+        });
+    }
+});
+module.exports = { login, getUsers, getSingleUser, deleteSingleUser, register, updateUser };
