@@ -8,6 +8,8 @@ const {
 } = require("../controller/goal_controller");
 const authUser =require("../middleware/authUser")
 const authRoles = require("../middleware/authRoles"); 
+const setGoal = require("../middleware/setGoal");
+const authGoal = require("../middleware/authGoal");
 
 const goalRouter= appRouter.Router();
 
@@ -18,9 +20,9 @@ goalRouter.get("/", authUser, getGoals);
 
 goalRouter
   .route("/:id")
-  .get(authUser, getGoal)
-  .delete(authUser, authRoles("admin"), deleteGoal)
-  .patch(authUser, updateGoal);
+  .get(authUser, setGoal,authGoal, getGoal)
+  .delete(authUser, setGoal,authGoal, deleteGoal)
+  .patch(authUser, setGoal,authGoal, updateGoal);
 
 
 

@@ -44,9 +44,10 @@ const getGoals = async (req:RequestWithUser, res:Response) => {
 };
 
 const getGoal = async (req:RequestWithUser, res:Response) => {
+  console.log(req.user)
   try {
     const { id } = req.params;
-    const goal = await Goal.findById(id);
+    const goal = await Goal.findById(id).populate("author");
 
     if (!goal) {
       res.status(404).json("goal not found");

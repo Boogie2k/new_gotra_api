@@ -45,9 +45,10 @@ const getGoals = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 const getGoal = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log(req.user);
     try {
         const { id } = req.params;
-        const goal = yield Goal.findById(id);
+        const goal = yield Goal.findById(id).populate("author");
         if (!goal) {
             res.status(404).json("goal not found");
             return;
