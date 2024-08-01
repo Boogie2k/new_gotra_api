@@ -9,23 +9,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const jwt = require('jsonwebtoken');
-const User = require('../Model/User_model');
-const Goal = require('../Model/Goal_model');
 const canViewGoal = require('../permissions/canViewGoal');
-const setGoal = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        const goalId = req.params.id;
-        const goal = yield Goal.findById(goalId).populate('author');
-        if (!goal) {
-            return res.status(404).json({ status: 'failed', message: 'Goal not found' });
-        }
-        req.goal = goal;
-        next();
+const authGoal = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    if (!canViewGoal(req.user, req.goal)) {
+        return res.status(401).json("Unauthorized");
     }
-    catch (error) {
-        console.log(error);
-        return res.status(500).json({ status: 'failedis', message: error });
-    }
+    next();
 });
-module.exports = setGoal;
+module.exports = authGoal;
