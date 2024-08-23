@@ -88,7 +88,7 @@ const getSingleUser = async (req:RequestWithUser, res:Response) => {
       return;
     }
     res.status(200).json(user);
-  } catch (error) {}
+  } catch (error) {} 
 };
 
 const deleteSingleUser = async (req:RequestWithUser, res:Response) => {

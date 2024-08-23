@@ -74,8 +74,8 @@ const getUsers = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 });
 const getSingleUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { email } = req.body;
-        const user = yield User.findOne({ email });
+        const { id } = req.params;
+        const user = yield User.findById(id);
         if (!user) {
             res.json("user not found");
             return;
