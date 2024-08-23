@@ -81,8 +81,8 @@ const getUsers = async (req:RequestWithUser, res:Response) => {
 
 const getSingleUser = async (req:RequestWithUser, res:Response) => {
   try {
-    const { email } = req.body;
-    const user = await User.findOne({ email });
+    const { id } = req.params;
+    const user = await User.findById(id);
     if (!user) {
       res.json("user not found");
       return;
